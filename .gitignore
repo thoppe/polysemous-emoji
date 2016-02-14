@@ -4,3 +4,6 @@
   
 # Do not save the auth file
 twitter_auth.ini
+
+# Data directory
+raw/*
