@@ -1,5 +1,6 @@
 import os, time, json, codecs
-import emoji, tweepy
+import tweepy
+from src.emoji_handler import load_emoji
 
 # Load the config files
 from configobj import ConfigObj
@@ -12,18 +13,7 @@ cred   = ConfigObj(f_auth)
 cmd = "mkdir -p {input_data_directory}"
 os.system(cmd.format(**config))
 
-EM = {}
-with open(config["scrape"]["f_emoji"]) as FIN:
-    for line in FIN:
-        text = line.strip()
-        if not text: continue
-        key = ":{}:".format(text)
-        val = emoji.emojize(key,use_aliases=True)
-        assert key != val, "{} not an emoji".format(key)
-        EM[text] = val
-
-print "Loaded {} emoji to scrape.".format(len(EM))
-
+EM = load_emoji(config["scrape"]["f_emoji"])
 
 # Basic stream listener
 
