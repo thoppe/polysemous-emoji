@@ -1,0 +1,6 @@
+# Temp files
+*~
+\#
+  
+# Do not save the auth file
+twitter_auth.ini
