@@ -1,7 +1,6 @@
 import os, time, json, codecs
 import emoji, tweepy
 
-
 # Load the config files
 from configobj import ConfigObj
 config = ConfigObj("config.ini")
