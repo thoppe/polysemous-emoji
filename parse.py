@@ -62,6 +62,8 @@ else:
     ITR = itertools.imap(dispatcher, INPUT_ITR)
 
 
-for t in ITR:
-    print t
+
+if __name__ == "__main__":
+    for t in ITR:
+        print t
                     

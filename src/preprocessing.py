@@ -42,7 +42,7 @@ def remove_apostrophe(t):
     '''
     return t.replace("'","")
 
-saved_space_chars = string.letters + string.digits + string.whitespace
+saved_space_chars = string.letters + string.digits + string.whitespace + '#'
 
 @pipeline_function
 def space_symbols(t):
@@ -62,6 +62,24 @@ def HTML_symbols(t):
     return HP.unescape(t)
 
 
+
+@pipeline_function
+def special_lowercase(t):
+    '''
+    Map tokens to lowercase if there isn't a caps after the first
+    character.
+    '''
+    out = []
+    for token in t.split():
+
+        if len(token) > 1 and token[1:].lower() == token[1:]:
+            token = token.lower()
+            
+        out.append(token)
+        
+    return ' '.join(out)
+
+
 @pipeline_function
 def replace_emoji(t, prefix, table):
     '''
@@ -70,3 +88,20 @@ def replace_emoji(t, prefix, table):
     t = [prefix+table[token] if token in table.keys()
          else token for token in t.split()]
     return ' '.join(t)
+
+
+saved_limit_characters = set(saved_space_chars + '@')
+
+@pipeline_function
+def limit_character_subset(t):
+    '''
+    Removes single character tokens not matching a specific set,
+    useful if `space_symbols` has been run already.
+    '''
+    out = []
+    for token in t.split():
+
+        if len(token) > 1 or token in saved_limit_characters:
+            out.append(token)
+        
+    return ' '.join(out)
