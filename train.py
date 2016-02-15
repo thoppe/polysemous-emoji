@@ -11,21 +11,11 @@ print "Using {} cores to train the model".format(workers)
 
 # Build the model
 features = Word2Vec(workers  =workers,
-                    window   =100,
                     sample   =wcon.as_float("sample"),
+                    window   =wcon.as_int("window"),
                     negative =wcon.as_int("negative"),
                     size     =wcon.as_int("model_size"),
                     min_count=wcon.as_int("min_count"))
-
-model_size = 200
-min_count = 30
-features = Word2Vec(workers=8,
-                    window=5,
-                    negative=5,
-                    sample=1e-5,
-                    size=model_size,
-                    min_count=min_count)
-
 
 from parse import parsed_tweet_iterator
 def split_token_iter():
@@ -48,3 +38,9 @@ print "Reducing the features"
 features.init_sims(replace=True)
 
 print features
+
+print "Saving the features"
+import os
+os.system('mkdir -p clf')
+f_features = wcon["f_features"].format(**wcon)
+features.save(f_features)

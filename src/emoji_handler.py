@@ -1,9 +1,9 @@
 import emoji
-
+import collections
 
 def load_emoji(f_emoji_list):
     
-    emoji_chars = {}
+    emoji_chars = collections.OrderedDict()
 
     with open(f_emoji_list) as FIN:
 

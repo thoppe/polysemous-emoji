@@ -1,4 +1,4 @@
-import codecs, glob, os, itertools
+import codecs, glob, os, itertools, random
 from src.emoji_handler import load_emoji
 
 # Load the config files
@@ -30,14 +30,25 @@ for name in config["parse"]["pipeline"]:
 ###################################################################
 
 # Iterates through all the tweets downloaded
-def tweet_iterator(limit):
+def tweet_iterator(limit=0, shuffle=True):
     data_dir = config["input_data_directory"]
-    F = glob.glob(os.path.join(data_dir,"*"))
+    F = sorted(glob.glob(os.path.join(data_dir,"*")))
     counter = itertools.count()
+
+    if shuffle:
+        random.shuffle(F)
     
     for f in F:
         with codecs.open(f,'r','utf-8') as FIN:
-            for line in FIN:
+
+            ITR = FIN
+
+            # If shuffle is True, load the file then shuffle lines
+            if shuffle:
+                ITR = list(FIN)
+                random.shuffle(ITR)
+            
+            for line in ITR:
                 yield line.strip()
 
                 c = counter.next()
@@ -52,8 +63,9 @@ def dispatcher(x):
 
 def parsed_tweet_iterator():
 
-    limit = config["parse"].as_int("limit")
-    INPUT_ITR = tweet_iterator(limit=limit)
+    limit   = config["parse"].as_int("limit")
+    shuffle = config["parse"].as_bool("shuffle")
+    INPUT_ITR = tweet_iterator(limit=limit, shuffle=shuffle)
     
     if config["parse"].as_bool("multiprocessing"):
         cs = config["parse"].as_int("multiprocessing_chunksize")
