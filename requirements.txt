@@ -6,3 +6,8 @@ emoji
 
 # Word2Vec
 gensim
+KSVD
+
+# kSVD
+-e git+https://github.com/hoytak/pyksvd
+h5py

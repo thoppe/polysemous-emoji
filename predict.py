@@ -8,9 +8,6 @@ wcon = config["word2vec"]
 from gensim.models.word2vec import Word2Vec
 f_features = wcon["f_features"].format(**wcon)
 
-f_features = "clf/features_200_10.w2v"
-
-
 clf = Word2Vec.load(f_features)
 EM = load_emoji(config["scrape"]["f_emoji"])
 
