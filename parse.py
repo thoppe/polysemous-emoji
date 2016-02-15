@@ -41,7 +41,6 @@ def tweet_iterator(limit):
                 yield line.strip()
 
                 c = counter.next()
-                print c
                 
                 if limit and limit < c:
                     raise StopIteration
