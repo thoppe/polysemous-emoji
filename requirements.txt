@@ -1,3 +1,8 @@
+configobj
+
+# Preprocessing
 tweepy
 emoji
-configobj
+
+# Word2Vec
+gensim

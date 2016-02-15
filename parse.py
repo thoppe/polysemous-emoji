@@ -1,7 +1,4 @@
-# FIX HASH TAGS
-
-
-import codecs, glob, os
+import codecs, glob, os, itertools
 from src.emoji_handler import load_emoji
 
 # Load the config files
@@ -42,28 +39,36 @@ def tweet_iterator(limit):
         with codecs.open(f,'r','utf-8') as FIN:
             for line in FIN:
                 yield line.strip()
+
+                c = counter.next()
+                print c
                 
-                if limit and limit < counter.next():
+                if limit and limit < c:
                     raise StopIteration
 
 def dispatcher(x):
     return reduce(lambda x, f: f(x), parser_functions, x)
 
 ###################################################################
-INPUT_ITR = tweet_iterator(limit = config["parse"].as_int("limit"))
 
-if config["parse"].as_bool("multiprocessing"):
-    cs = config["parse"].as_int("multiprocessing_chunksize")
-    import multiprocessing
-    MP = multiprocessing.Pool()
-    ITR = MP.imap(dispatcher, INPUT_ITR,chunksize=cs)
-else:
-    import itertools
-    ITR = itertools.imap(dispatcher, INPUT_ITR)
+def parsed_tweet_iterator():
 
+    limit = config["parse"].as_int("limit")
+    INPUT_ITR = tweet_iterator(limit=limit)
+    
+    if config["parse"].as_bool("multiprocessing"):
+        cs = config["parse"].as_int("multiprocessing_chunksize")
+        import multiprocessing
+        MP = multiprocessing.Pool()
+        ITR = MP.imap(dispatcher, INPUT_ITR,chunksize=cs)
+    else:
+        ITR = itertools.imap(dispatcher, INPUT_ITR)
+
+    return ITR
 
 
 if __name__ == "__main__":
-    for t in ITR:
+       
+    for t in parsed_tweet_iterator():
         print t
                     
