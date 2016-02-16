@@ -1,6 +1,6 @@
 import glob, codecs, re, string
 import HTMLParser
-
+import emoji
 
 def pipeline_function(func):
     
@@ -85,9 +85,14 @@ def replace_emoji(t, prefix, table):
     '''
     Replace the emoji dict with a word token
     '''
-    t = [prefix+table[token] if token in table.keys()
-         else token for token in t.split()]
-    return ' '.join(t)
+    out = []
+    for token in t.split():
+        if token in emoji.UNICODE_EMOJI:
+            token = prefix + emoji.UNICODE_EMOJI[token].strip(":")
+        out.append(token)
+
+    return ' '.join(out)
+
 
 
 saved_limit_characters = set(saved_space_chars + '@')
