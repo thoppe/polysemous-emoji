@@ -1,6 +1,6 @@
 from ksvd import KSVD
 import h5py, os
-from src.emoji_handler import load_emoji
+import emoji
 
 # Load the config files
 from configobj import ConfigObj
@@ -24,6 +24,8 @@ clf = Word2Vec.load(f_features)
 import numpy as np
 words_index = np.array(clf.index2word)
 words = dict(zip(words_index,range(len(words_index))))
+
+EM = [w for w in clf.index2word if "EMOJI_" in w][:40]
 del clf
 
 
@@ -47,18 +49,19 @@ for n,i in enumerate(sparse_idx):
 
 print
 
-EM = load_emoji(config["scrape"]["f_emoji"])
-for key,symbol in EM.items():
-    name = config["parse"]["replace_emoji"]["prefix"] + key
-
-    idx = words[name]
+for key in EM:
+    name = ':'+w[6:]+':'
+    symbol = emoji.emojize(name,use_aliases=True)
+    idx = words[key]
     g   = gamma[idx]
 
     non_zero_items = np.where(g!=0)[0]
     
     print key, g[g!=0]
     for i in non_zero_items:
-        print "{:0.4f} {:0.4f} {}".format(g[i], sparse_importance[i], sparse_desc[i])
+
+        if sparse_importance[i]>0 and g[i]>0:
+            print "{:0.4f} {:0.4f} {}".format(g[i], sparse_importance[i], sparse_desc[i])
     print
 
     

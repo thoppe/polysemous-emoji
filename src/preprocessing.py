@@ -93,8 +93,6 @@ def replace_emoji(t, prefix, table):
 
     return ' '.join(out)
 
-
-
 saved_limit_characters = set(saved_space_chars + '@')
 
 @pipeline_function
@@ -110,3 +108,47 @@ def limit_character_subset(t):
             out.append(token)
         
     return ' '.join(out)
+
+@pipeline_function
+def remove_twitter_mentions_hashtags(t):
+    '''
+    Since they seem to lack semantic value, remove URLS, @ and hashtags
+    '''
+    out = []
+    for token in t.split():
+
+        if token[0] == "@":
+            continue
+        
+        if token[0] == "#":
+            continue
+
+        if token == "URL":
+            continue
+        
+        out.append(token)
+
+    return ' '.join(out)
+
+
+#####################################################################
+
+#import spacy.en
+#NLP = spacy.en.English()
+#import pattern.en
+#parser = lambda x:pattern.en.parse(x,chunks=True,)
+#help(pattern.en.parse)
+'''
+@pipeline_function
+def POS_tag(t):
+    #t = "I bought the record from Best Buy"
+    print t
+    func = pattern.en.parsetree
+    for sentence in func(t):
+        for chunk in sentence.chunks:
+            print chunk 
+    exit()
+    return t
+'''
+
+
