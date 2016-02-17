@@ -1,4 +1,5 @@
 configobj
+requests>=2.9.1
 
 # Preprocessing
 tweepy
@@ -6,8 +7,7 @@ emoji
 
 # Word2Vec
 gensim
-KSVD
 
 # kSVD
--e git+https://github.com/hoytak/pyksvd
+# -e git+https://github.com/hoytak/pyksvd
 h5py

@@ -15,6 +15,6 @@ def load_emoji(f_emoji_list):
             assert key != val, "{} not an emoji".format(key)
             emoji_chars[text] = val
 
-    print "Loaded {} emoji.".format(len(emoji_chars))
+    #print "Loaded {} emoji.".format(len(emoji_chars))
 
     return emoji_chars
