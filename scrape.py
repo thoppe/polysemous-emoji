@@ -63,4 +63,10 @@ auth.set_access_token(cred["access_token"],
 stream = tweepy.Stream(auth, L)
 
 keywords = EM.values()
-stream.filter(languages=['en'],track=keywords)
+
+while True:
+    try:
+        stream.filter(languages=['en'],track=keywords)
+    except:
+        print "Stream error"
+        time.sleep(10)
