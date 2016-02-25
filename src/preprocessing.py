@@ -109,6 +109,22 @@ def limit_character_subset(t):
         
     return ' '.join(out)
 
+
+@pipeline_function
+def remove_repeated_tokens(t):
+    '''
+    Emojis seem to be repeated, this confuses embeddings based off proximity.
+    '''
+    out = []
+    pre = None
+    for token in t.split():
+        if pre != token:
+            out.append(token)
+        pre = token
+    return ' '.join(out)
+
+
+
 @pipeline_function
 def remove_twitter_mentions_hashtags(t):
     '''

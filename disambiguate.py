@@ -2,6 +2,12 @@ from ksvd import KSVD
 import h5py, os
 import emoji
 
+
+#EMOJI_unamused_face [-0.35274374 -0.60665315  0.23066433  0.18102476]
+#0.2307 155.2432 [u'valentine' u'valentines' u'VDay' u'vday' u'gifts' u'flowers']
+#0.1810 244.0418 [u'awake' u'4am' u'11pm' u'7am' u'30am' u'5am']
+
+
 # Load the config files
 from configobj import ConfigObj
 config = ConfigObj("config.ini")
@@ -25,6 +31,7 @@ import numpy as np
 words_index = np.array(clf.index2word)
 words = dict(zip(words_index,range(len(words_index))))
 
+
 EM = [w for w in clf.index2word if "EMOJI_" in w][:40]
 del clf
 
@@ -37,14 +44,20 @@ sparse_idx = np.argsort(sparse_importance)[::-1]
 sparse_desc = {}
 print "Showing examples of the spare vectors"
 
-for n,i in enumerate(sparse_idx):
-    #print gamma[:,i].sum()
-    idx = np.argsort( gamma[:,i] )[-describe_n:]
-    weights = gamma[:,i][idx]
+top_word_cutoff = 10**4
+gamma_cut = gamma[:top_word_cutoff,:]
+print gamma.shape, gamma_cut.shape
 
+for n,i in enumerate(sparse_idx):
+
+    idx = np.argsort( gamma_cut[:,i] )[-describe_n:]
+    weights = gamma_cut[:,i][idx]
     sparse_desc[i] = words_index[idx]
+    
     if n < 15:
         print sparse_importance[i], sparse_desc[i]
+        
+#exit()
 
 
 print
