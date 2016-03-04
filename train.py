@@ -19,9 +19,9 @@ features = Word2Vec(workers  =workers,
 
 from parse import parsed_tweet_iterator
 def split_token_iter():
-    for t in parsed_tweet_iterator():
-        yield t.split()
-
+    with open("all_parsed_tweets.txt") as FIN:
+        for line in FIN:
+            yield line.split()
 
 print "Learning the vocabulary"
 ITR = split_token_iter()

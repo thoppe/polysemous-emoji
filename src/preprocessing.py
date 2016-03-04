@@ -133,14 +133,14 @@ def remove_twitter_mentions_hashtags(t):
     out = []
     for token in t.split():
 
-        if token[0] == "@":
-            continue
+        #if token[0] == "@":
+        #    continue
         
         if token[0] == "#":
             continue
 
-        if token == "URL":
-            continue
+        #if token == "URL":
+        #   continue
         
         out.append(token)
 

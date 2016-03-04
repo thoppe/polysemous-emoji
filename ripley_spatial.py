@@ -21,9 +21,7 @@ clf = Word2Vec.load(f_features)
 X = clf.syn0
 
 
-skip = 50
-#X = X[::skip]
-X = X[:1000]
+X = X[500:1000]
 dist1 = pdist(X,metric='cosine')
 n,dim = X.shape
 
