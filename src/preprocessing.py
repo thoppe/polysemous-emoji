@@ -147,6 +147,24 @@ def remove_twitter_mentions_hashtags(t):
     return ' '.join(out)
 
 
+
+@pipeline_function
+def remove_emoji_modifier(t):
+    '''
+    Remove emojis that are modifiers (this removes skin-tone)
+    '''
+    out = []
+    for token in t.split():
+
+        if "emoji_modifier" in token:
+            continue
+        
+        out.append(token)
+
+    return ' '.join(out)
+
+
+
 #####################################################################
 
 #import spacy.en
