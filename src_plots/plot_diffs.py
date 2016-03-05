@@ -1,6 +1,6 @@
-import itertools
+import itertools, os
 import emoji
-
+from sklearn.cluster import SpectralClustering as cluster_clf
 # sudo apt-get install ttf-ancient-fonts
 
 CLUSTER_N = 4
@@ -21,7 +21,6 @@ import numpy as np
 import pandas as pd
 
 def label_maker(s):
-    #return u"{} {}".format(s, emoji.emojize(":"+s+":"))
     return emoji.emojize(":"+s+":")
 
 names = map(label_maker,EM)
@@ -36,22 +35,6 @@ for w1, w2 in itertools.product(EM,repeat=2):
     df[name1][name2] = clf.similarity("EMOJI_"+w1,"EMOJI_"+w2)
 
 A = df.values
-from sklearn.metrics import silhouette_samples, silhouette_score
-from sklearn.cluster import SpectralClustering as cluster_clf
-
-'''
-#from sklearn.cluster import KMeans as cluster_clf
-for n in range(2,20):
-
-    cluster_args = {"n_clusters":n}
-
-    cluster = cluster_clf(**cluster_args)
-    y_labels = cluster.fit_predict(A)
-    idx = np.argsort(y_labels)
-
-    silhouette_avg = silhouette_score(A, y_labels)
-    print n, silhouette_avg
-'''
 
 cluster_args = {"n_clusters":CLUSTER_N}
 cluster = cluster_clf(**cluster_args)
@@ -81,9 +64,16 @@ rc={
 sns.set(rc=rc)
 sns.heatmap(df2,vmax=1.0,cbar=False)
 plt.tight_layout()
+
+os.system('mkdir -p figures')
+f_png = 'figures/similarity_map.png'
+plt.savefig(f_png, bbox_inches=None)
+
 plt.show()
 
+
 '''
+# Attempt at a TSNE plot
 sns.plt.figure()
 from sklearn.manifold import TSNE
 
