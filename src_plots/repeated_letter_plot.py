@@ -1,5 +1,5 @@
 import pyparsing as pyr
-import collections
+import collections, os
 import numpy as np
 
 min_n, max_n = 2, 15
@@ -49,7 +49,8 @@ import pandas as pd
 df = pd.DataFrame(data=data, columns=["word",'n','count'])
 
 import seaborn as sns
-sns.plt.figure(figsize=(14,10))
+plt = sns.plt    
+fig = plt.figure(figsize=(14,10))
 
 colors = sns.color_palette("hls", 5)
 
@@ -61,10 +62,15 @@ for word,block in df.groupby("word"):
 
         max_idx = X[Y.argmax()]
         color_idx = max_idx-2
-        #if color_idx!=0: continue
-        
-        sns.plt.plot(X,Y, label=word, color=colors[color_idx])
+        plt.plot(X,Y, label=word, color=colors[color_idx])
 
-sns.plt.legend(ncol=4,fontsize=18)
-sns.plt.xlim(2,12)
-sns.plt.show()
+plt.legend(ncol=4,fontsize=18)
+plt.xlim(2,12)
+plt.xlabel("number of repeats",fontsize=18)
+plt.ylabel("probability",fontsize=18)
+plt.xticks(range(min_n, max_n))
+
+os.system('mkdir -p figures')
+f_png = 'figures/repeated_letters.png'
+plt.savefig(f_png, bbox_inches=None)
+plt.show()
