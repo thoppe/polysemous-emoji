@@ -2,11 +2,14 @@ from collections import Counter, defaultdict
 import os, tqdm
 import numpy as np
 from scipy.ndimage.measurements import label
-
 import itertools, multiprocessing
+# rm -f all_unique_tweets.txt && cat all_parsed_tweets.txt | unique all_unique_tweets.txt
+
 
 ngrams = defaultdict(Counter)
-total_tweets = 13135376
+total_tweets = 10984240
+
+f_tweets = "all_unique_tweets.txt"
 
 def solve_mask(line):
 
@@ -21,7 +24,7 @@ def solve_mask(line):
     return (tokens, feature_mask, n_features)
     
 
-with open("all_parsed_tweets.txt") as FIN:
+with open(f_tweets) as FIN:
     pbar = tqdm.tqdm(total=total_tweets)
 
     #ITR = itertools.imap(solve_mask, FIN)

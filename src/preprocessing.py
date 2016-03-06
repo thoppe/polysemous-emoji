@@ -165,6 +165,23 @@ def remove_emoji_modifier(t):
 
 
 
+@pipeline_function
+def remove_repeat_spam(t):
+    '''
+    Remove tweets with numbers at the end or x{number}
+    '''
+    tokens = t.split()
+    last_token = tokens[-1]
+    if last_token.isnumeric() and int(last_token) != 2:
+        return ""
+
+    # Look for x7 x23198 etc...
+    if len(last_token)>=2 and last_token[1:].isnumeric():
+        return ""
+    
+    return t
+
+
 #####################################################################
 
 #import spacy.en

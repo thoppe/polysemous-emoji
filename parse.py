@@ -81,5 +81,7 @@ def parsed_tweet_iterator():
 if __name__ == "__main__":
        
     for t in parsed_tweet_iterator():
-        print t
+        if t:
+            print t
+            
                     
