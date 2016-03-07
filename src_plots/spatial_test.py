@@ -21,7 +21,7 @@ clf = Word2Vec.load(f_features)
 X = clf.syn0
 
 
-X = X[500:1000]
+X = X[0:1000]
 dist1 = pdist(X,metric='cosine')
 n,dim = X.shape
 
@@ -34,5 +34,10 @@ dist2 = pdist(rand_pts,metric='cosine')
 import seaborn as sns
 sns.distplot(dist1, label="w2vec")
 sns.distplot(dist2, label="random points")
-sns.plt.legend()
+sns.plt.legend(fontsize=18, loc="best")
+sns.plt.title("All pairwise distances of w2vec over {}-d hypersphere".format(dim))
+sns.plt.xlim(0,2)
+os.system('mkdir -p figures')
+f_png = 'figures/hypersphere_dist.png'
+sns.plt.savefig(f_png, bbox_inches=None)
 sns.plt.show()
