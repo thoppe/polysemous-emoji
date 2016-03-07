@@ -68,7 +68,6 @@ plt.tight_layout()
 os.system('mkdir -p figures')
 f_png = 'figures/similarity_map.png'
 plt.savefig(f_png, bbox_inches=None)
-
 plt.show()
 
 

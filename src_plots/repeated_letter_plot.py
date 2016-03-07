@@ -72,5 +72,7 @@ plt.xticks(range(min_n, max_n))
 
 os.system('mkdir -p figures')
 f_png = 'figures/repeated_letters.png'
-plt.savefig(f_png, bbox_inches=None)
+
+sns.plt.tight_layout()
+sns.plt.savefig(f_png, bbox_inches=None)
 plt.show()

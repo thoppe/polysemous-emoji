@@ -39,5 +39,7 @@ sns.plt.title("All pairwise distances of w2vec over {}-d hypersphere".format(dim
 sns.plt.xlim(0,2)
 os.system('mkdir -p figures')
 f_png = 'figures/hypersphere_dist.png'
+
+sns.plt.tight_layout()
 sns.plt.savefig(f_png, bbox_inches=None)
 sns.plt.show()
