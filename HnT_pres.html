@@ -63,22 +63,22 @@
 </section><section class="vertical-stack">
 <section   class="vertical-slide">
 <p>
-<h2>Data collection</h2></p>
+<h2>1. Data collection</h2></p>
 <br>
 <p>
 Gathered all tweets that contained the <a href="http://emojitracker.com/">top 200 emoji</a>.<br>Approximately 80,000 per hour, 13,000,000 total.</p>
 <br>
 <p>
-<h2>Data QC (spam tweets)</h2></p>
+<h2>2. Data QC (spam tweets)</h2></p>
 <br>
 <p>
 Removed exactly identical tweets.<br>Removed tweets that only differ by index:</p>
 <br>
 <p>
-"Hello baby @justinbieber Can u follow me? ♥ x37"<br>"Hello baby @justinbieber Can u follow me? ♥ x38"<br>"Hello baby @justinbieber Can u follow me? ♥ x39"</p>
+"Hello baby @justinbieber Can u follow me? <span class="emoji">♥</span> x37"<br>"Hello baby @justinbieber Can u follow me? <span class="emoji">♥</span> x38"<br>"Hello baby @justinbieber Can u follow me? <span class="emoji">♥</span> x39"</p>
 </section><section   class="vertical-slide">
 <p>
-<h2>Data Wrangling</h2></p>
+<h2>3. Data Wrangling</h2></p>
 <br>
 <p>
 Built a pipeline for repeatable processing:</p>
@@ -87,13 +87,43 @@ Built a pipeline for repeatable processing:</p>
 <code>remove_mentions, remove_urls, HTML_symbols, remove_apostrophe, space_symbols, special_lowercase, replace_emoji, limit_character_subset, remove_repeated_tokens, remove_twitter_mentions_hashtags, remove_emoji_modifier</code></p>
 <br>
 <p>
-Special care: Emoji's have <a href="http://emojipedia.org/emoji-modifier-fitzpatrick-type-1-2/">skin tone</a> which count as an extra character.<br>TIL: Fitzpatrick is the name of the skin tone scale.</p>
+Special care: Emoji have <a href="http://emojipedia.org/emoji-modifier-fitzpatrick-type-1-2/">skin tone</a> which count as an extra character.<br>TIL: Fitzpatrick is the name of the skin tone scale.</p>
 </section><section   class="vertical-slide">
 <p>
-<h2>Machine Learning</h2>Train <code>word2vec</code> over tweets and consider emojis as a qualified "word"</p>
+<h2>4. Machine Learning</h2>Train <code>word2vec</code> over tweets and consider emojis as a qualified "word"</p>
+<br>
+<p>
+<h2>5. <em>What can we learn?</em></h2>Habits of highly emotive people...</p>
+</section>
+</section><section class="vertical-stack">
+<section   class="vertical-slide">
+<p>
+<h2>Emoji have synonyms and antonyms</h2></p>
 <figure>
     <a href="figures/similarity_map.png">
     <img class="" src="figures/similarity_map.png" height="700px">
+    </a>
+    
+    </figure>
+</section>
+</section><section class="vertical-stack">
+<section   class="vertical-slide">
+<p>
+<h3>There is an optimal length to <em>omggggggg</em></h3></p>
+<figure>
+    <a href="figures/repeated_letters.png">
+    <img class="" src="figures/repeated_letters.png" height="700px">
+    </a>
+    
+    </figure>
+</section>
+</section><section class="vertical-stack">
+<section   class="vertical-slide">
+<p>
+<h3><code>word2vec</code> spreads vectors across the hypersphere</h3></p>
+<figure>
+    <a href="figures/hypersphere_dist.png">
+    <img class="" src="figures/hypersphere_dist.png" height="700px">
     </a>
     
     </figure>

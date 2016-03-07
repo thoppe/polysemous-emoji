@@ -17,37 +17,48 @@
 ## What about emoji? <span class="emoji">😍 😘 😂 ❤ 😭  💯 </span>
    
 ====
-## Data collection
+## 1. Data collection
 
 Gathered all tweets that contained the [top 200 emoji](http://emojitracker.com/).
 Approximately 80,000 per hour, 13,000,000 total.
 
-## Data QC (spam tweets)
+## 2. Data QC (spam tweets)
 
 Removed exactly identical tweets.
 Removed tweets that only differ by index:
-
-"Hello baby @justinbieber Can u follow me? ♥ x37"
-"Hello baby @justinbieber Can u follow me? ♥ x38"
-"Hello baby @justinbieber Can u follow me? ♥ x39"
+  
+"Hello baby @justinbieber Can u follow me? <span class="emoji">♥</span> x37"
+"Hello baby @justinbieber Can u follow me? <span class="emoji">♥</span> x38"
+"Hello baby @justinbieber Can u follow me? <span class="emoji">♥</span> x39"
   
 ====*
 
-## Data Wrangling
+## 3. Data Wrangling
 
 Built a pipeline for repeatable processing:
 
 `remove_mentions, remove_urls, HTML_symbols, remove_apostrophe, space_symbols, special_lowercase, replace_emoji, limit_character_subset, remove_repeated_tokens, remove_twitter_mentions_hashtags, remove_emoji_modifier`
 
-Special care: Emoji's have [skin tone](http://emojipedia.org/emoji-modifier-fitzpatrick-type-1-2/) which count as an extra character. 
+Special care: Emoji have [skin tone](http://emojipedia.org/emoji-modifier-fitzpatrick-type-1-2/) which count as an extra character. 
 TIL: Fitzpatrick is the name of the skin tone scale.
 
 ====*
 
-## Machine Learning
+## 4. Machine Learning
 Train `word2vec` over tweets and consider emojis as a qualified "word"
-!(figures/similarity_map.png) <<height:700px>>
 
+## 5. _What can we learn?_
+Habits of highly emotive people...
+
+====
+## Emoji have synonyms and antonyms
+!(figures/similarity_map.png) <<height:700px>>
+====
+### There is an optimal length to _omggggggg_
+!(figures/repeated_letters.png) <<height:700px>>
+====
+### `word2vec` spreads vectors across the hypersphere
+!(figures/hypersphere_dist.png) <<height:700px>>
 ====
 
 
