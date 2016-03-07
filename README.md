@@ -1,3 +1,3 @@
-# Black Hat Data Wrangling
+# Polysemous emoji
 
-This branch is for the [public presentation](http://thoppe.github.io/Presentation-Black-Hack-Data-Wrangling/BHDW_DW_meetup.html) of the Black Hat Data Wrangling to be presented at Data Wranglers DC.
+This branch is for the [public presentation](https://github.com/thoppe/polysemous-emoji/HnT_pres.html) of the Hack && Tell talk.
