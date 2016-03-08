@@ -5,18 +5,19 @@ import collections
 import emoji
 
 from sklearn.cluster import AffinityPropagation as cluster_clf
-cluster_args = {"damping":0.999}
+cluster_args = {"damping":0.995}
 
 #from sklearn.cluster import KMeans as cluster_clf
 #from sklearn.cluster import MeanShift as cluster_clf
 #cluster_args = {}
 
-max_t  = 20000
+max_t  = 2500
 skip_t = 6
 
 target = "skull"
-target = "Smiling Face With Open Mouth and Smiling Eyes"
-target = "key"
+#target = "Smiling Face With Open Mouth and Smiling Eyes"
+#target = "key"
+#target = "Smiling Face With Halo"
 target = target.lower().replace(" ","_")
 emoji_name = emoji.emojize(":"+target+":", use_aliases=True)
 target = "EMOJI_"+target.lower().replace(" ","_")
@@ -43,13 +44,14 @@ z = clf[target]
 def tweet_iterator(limit=None,skip=None):
     counter = 0
     with open("all_unique_tweets.txt") as FIN:
-        for line in FIN:
+        for k,line in enumerate(FIN):
             if target in line:
 
-                counter += 1                
                 if counter == limit: break
 
-                if skip and counter%skip==0:
+
+                if skip and k%skip==0:
+                    counter += 1                
                     yield line.split()
 
 
