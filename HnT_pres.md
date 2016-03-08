@@ -60,7 +60,35 @@ Habits of highly emotive people...
 ### `word2vec` spreads vectors across the hypersphere
 !(figures/hypersphere_dist.png) <<height:700px>>
 ====
+## Polysemous emoji!
+!(figures/EMOJI_key.png) <<height:500px>>
+!(figures/EMOJI_skull.png) <<height:500px>>
+!(figures/EMOJI_smiling_face_with_open_mouth_and_smiling_eyes.png) <<height:500px>>
 
+Sample tweets containing target emoji, compute mean w2vec of each tweet, run low order affinity propagation, cluster and interpret vectors near clusters.
+====*
+## What is a <span class="emoji">🔑</span> ?
+!(figures/EMOJI_key.png) <<height:500px>>
+  
+#### major success is key consistency communication knowledge growth life
+  or
+## ❤ 💜 @ 😘 ❣ 💛 💖 💞 💝
 
+====*
+## What is a <span class="emoji">💀</span> ?
+!(figures/EMOJI_skull.png) <<height:500px>>
+
+### 🙃 after 😐 before I literally 😑 😕 just
+  or
+### WOAH LMAO LMFAO lmfao LMFAOOOO 😂 lmao
+  
+====
+
+## Can we automate this?
+
+## <span class="emoji">😂 😍 😭 😊  ❤ 😩 😘 💕  😒 😁 💯 😉  😏 😌   😔  💖 👀 😎 ♥  😢 😴 💙 😑  👌 💘 😕 🎶 💜 👍 ☺ 😳 ✨ 😄 😋 😪 😜 🙈  😞 😐 🙏 🙌 💔 👏 ▶ ✌ 👇 🔥 💁  💩 💀 💋 💗 🎉 💞  👉 👊 🌹 💓 👑 ‼  💪 💛 💚 🙊 😇 😈 😻 ➡ 😚 😛 😱 ✔ 😆 🌸 😝 </span> ...
+
+====
+  
 # Thanks, you!
 [@metasemantic](https://twitter.com/metasemantic)
